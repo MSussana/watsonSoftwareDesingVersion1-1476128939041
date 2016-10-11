@@ -27,29 +27,19 @@ public class Speech extends HttpServlet {
    
 	 private SpeechToText s2t = new SpeechToText();
 	 
-	 @Override
-	 public void init() throws ServletException {
-	   super.init();
-	   String vcap = System.getProperty("VCAP_SERVICES");
-	   if (vcap == null){
-	     try {
-	       vcap = FileUtils.readFileToString(new File("C:/Users/Sussana/Downloads/vcap.txt"));
-	     } catch (IOException e) {
-	       e.printStackTrace();
-	     }
-	   }
-	   CredentialUtils.setServices(vcap);
-	   s2t.setApiKey(CredentialUtils.getAPIKey("speech_to_text"));
-	 }
-
-	 public void voz_a_texto() throws ServletException, IOException{
-	   Speech ss = new Speech();
+	 public String voz_a_texto(String direccionAudio) throws ServletException, IOException{
 	   s2t.setUsernameAndPassword("fe0c1e3d-4bce-4310-b6e0-4c256e1b6f25", "LOrTEqJhjYSc");
-	   SpeechResults results = s2t.recognize(new File("C:/Users/Sussana/Downloads/Es_ES_spk24_16khz.wav"));
+	   SpeechResults results = s2t.recognize(new File(direccionAudio));
 	   System.out.println(results.getResults().get(0).toString());
+	   return results.getResults().get(0).toString();
 	   
 	 }
  
+	 public static void main(String[] args) throws ServletException, IOException {
+		 Speech ss = new Speech();
+		 ss.voz_a_texto("C:/Users/Sussana/Downloads/Es_ES_spk24_16khz.wav");
+	}
+	 
  private static final long serialVersionUID = 1L;
 
 }

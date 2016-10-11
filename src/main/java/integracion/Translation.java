@@ -29,28 +29,20 @@ public class Translation extends HttpServlet{
 		
 	private LanguageTranslation s2t = new LanguageTranslation();
 	
-	@Override
-	public void init() throws ServletException {
-	   super.init();
-	   String vcap = System.getProperty("VCAP_SERVICES");
-	   if (vcap == null){
-	     try {
-	       vcap = FileUtils.readFileToString(new File("C:/Users/Sussana/Downloads/vcap.txt"));
-	     } catch (IOException e) {
-	       e.printStackTrace();
-	     }
-	   }
-	   CredentialUtils.setServices(vcap);
-	   s2t.setApiKey(CredentialUtils.getAPIKey("language_translation"));
-	 }
-
-	 public void traducir() throws ServletException, IOException{
+	
+	 public TranslationResult traducir(String valor) throws ServletException, IOException{
 		s2t.setUsernameAndPassword("40a32988-cc12-4b21-84c4-afc9cf73bcc6", "OL3Jz2ojbLuo");
-	   TranslationResult result = s2t.translate("hello", "en", "es");
+	   TranslationResult result = s2t.translate(valor, "es", "en");
 	   System.out.println(result);
+	   return result;
 	   
 	 }
 
+	 public static void main(String[] args) throws ServletException, IOException {
+		 Translation s2t=new Translation();
+		 s2t.traducir("Hola");
+	}
+	 
 private static final long serialVersionUID = 1L;
 
 }
