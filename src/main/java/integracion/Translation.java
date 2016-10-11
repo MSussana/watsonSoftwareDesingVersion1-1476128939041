@@ -1,4 +1,4 @@
-package wasdev.sample.servlet;
+package integracion;
 
 import java.io.File;
 import java.io.FileInputStream;
