@@ -30,8 +30,8 @@ public class Speech extends HttpServlet {
 	 public String voz_a_texto(String direccionAudio) throws ServletException, IOException{
 	   s2t.setUsernameAndPassword("fe0c1e3d-4bce-4310-b6e0-4c256e1b6f25", "LOrTEqJhjYSc");
 	   SpeechResults results = s2t.recognize(new File(direccionAudio));
-	   System.out.println(results.getResults().get(0).toString());
-	   return results.getResults().get(0).toString();
+	   System.out.println(results.getResults().get(0).getAlternatives().get(0).getTranscript());
+	   return results.getResults().get(0).getAlternatives().get(0).getTranscript();
 	   
 	 }
  

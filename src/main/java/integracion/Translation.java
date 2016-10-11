@@ -30,17 +30,18 @@ public class Translation extends HttpServlet{
 	private LanguageTranslation s2t = new LanguageTranslation();
 	
 	
-	 public TranslationResult traducir(String valor) throws ServletException, IOException{
+	 public String traducir(String valor) throws ServletException, IOException{
 		s2t.setUsernameAndPassword("40a32988-cc12-4b21-84c4-afc9cf73bcc6", "OL3Jz2ojbLuo");
 	   TranslationResult result = s2t.translate(valor, "es", "en");
-	   System.out.println(result);
-	   return result;
+	   String lineaTraducida=result.getTranslations().get(0).getTranslation().toString();
+	   
+	   return lineaTraducida;
 	   
 	 }
 
 	 public static void main(String[] args) throws ServletException, IOException {
 		 Translation s2t=new Translation();
-		 s2t.traducir("Hola");
+		 s2t.traducir("Hola mi nombre es Watson");
 	}
 	 
 private static final long serialVersionUID = 1L;
